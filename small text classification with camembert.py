@@ -13,9 +13,9 @@ import pandas as pd
 df = pd.read_csv(f"{path}/french_tweets.csv")
 print(df.head())
 
-# Sample 10 000 examples
+# Sample 50 000 examples
 from sklearn.model_selection import train_test_split
-df_sample, _ = train_test_split(df,train_size=10000,stratify=df['label'],random_state=42)
+df_sample, _ = train_test_split(df,train_size=50000,stratify=df['label'],random_state=42)
 df_sample = df_sample.reset_index(drop=True)
 
 # import model
