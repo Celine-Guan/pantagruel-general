@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 import torch
 import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader, random_split
-from transformers import AutoTokenizer, AutoModel, RobertaModel, RobertaTokenizerFast
+from transformers import AutoTokenizer, AutoModel
 from transformers import get_scheduler
 from sklearn.metrics import accuracy_score
 from tqdm import tqdm
@@ -110,7 +110,7 @@ class ReviewDataset(Dataset):
 class MyClassificationModel(nn.Module):
     def __init__(self, model_name, num_classes=2, dropout_rate=0.1):
         super().__init__()
-        self.backbone = RobertaModel.from_pretrained(model_name)
+        self.backbone = AutoModel.from_pretrained(model_name)
         hidden_size = self.backbone.config.hidden_size
         self.classifier = nn.Sequential(
             nn.Dropout(dropout_rate),
@@ -199,7 +199,7 @@ def run_for_dataset(dataset_name):
     n_valid = int(len(train_texts) * VALID_RATIO)
     n_train = len(train_texts) - n_valid
 
-    tokenizer = RobertaTokenizerFast.from_pretrained(MODEL_NAME)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     train_dataset = ReviewDataset(train_texts, train_labels, tokenizer, MAX_SEQ_LENGTH)
     train_set, valid_set = random_split(train_dataset, [n_train, n_valid])
     test_dataset = ReviewDataset(test_texts, test_labels, tokenizer, MAX_SEQ_LENGTH)
