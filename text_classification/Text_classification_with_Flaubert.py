@@ -16,7 +16,7 @@ import logging
 """**set up parameters**"""
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_NAME = "bert-base-multilingual-cased"  # can change to camembert or other flaubert models
+MODEL_NAME = "flaubert/flaubert_base_cased"  # can change to camembert or other flaubert models
 DATA_PARENT_DIR = r"/home/sgu/datasets/CLS/raw/cls-acl10-unprocessed/fr"
 BATCH_SIZE = 16
 NUM_EPOCHS = 30
