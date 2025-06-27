@@ -16,7 +16,7 @@ import logging
 """**set up parameters**"""
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_NAME = "/home/sgu/models/Text_Base_fr_4GB_v0/HuggingFace"  # can change to camembert or pantagruel or other models
+MODEL_NAME = "/home/sgu/models/Text_Base_fr_4GB_v1/HuggingFace"  # can change to other pantagruel models
 DATA_PARENT_DIR = r"/home/sgu/datasets/CLS/raw/cls-acl10-unprocessed/fr"
 BATCH_SIZE = 16
 NUM_EPOCHS = 30
