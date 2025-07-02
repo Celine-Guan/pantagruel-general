@@ -12,6 +12,7 @@ from sklearn.metrics import accuracy_score
 from tqdm import tqdm
 import copy
 import logging
+import argparse
 
 """**set up seed**"""
 
@@ -23,7 +24,7 @@ torch.cuda.manual_seed_all(42)
 """**set up parameters**"""
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-MODEL_NAME = "/home/sgu/models/Text_Base_fr_4GB_camtok_step500K/HuggingFace"  # can change to other pantagruel models
+MODEL_NAME = None 
 DATA_PARENT_DIR = r"/home/sgu/datasets/CLS/raw/cls-acl10-unprocessed/fr"
 BATCH_SIZE = 16
 NUM_EPOCHS = 30
@@ -32,6 +33,18 @@ DATASETS = ["books", "dvd", "music"]
 MAX_SEQ_LENGTH = 512
 VALID_RATIO = 0.2
 EARLY_STOPPING_PATIENCE = 3
+
+"""**set up argparse to change models**"""
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="Text Classification using pre-trained French model")
+    parser.add_argument(
+        "--model_name",
+        type=str,
+        default="/home/sgu/models/Text_Base_fr_OSCAR_camtok/HuggingFace",
+        help="Pretrained model path"
+    )
+    return parser.parse_args()
 
 """**Function: extract texts and labels from datasets**"""
 
@@ -197,9 +210,9 @@ def eval_model(model, dataloader):
 def run_for_dataset(dataset_name):
     data_dir = os.path.join(DATA_PARENT_DIR, dataset_name)
 
-    print(f"Parsing train data for {dataset_name}...")
+    logging.info(f"Parsing train data for {dataset_name}...")
     train_texts, train_labels = parse_review_file(os.path.join(data_dir, "train.review"))
-    print(f"Parsing test data for {dataset_name}...")
+    logging.info(f"Parsing test data for {dataset_name}...")
     test_texts, test_labels = parse_review_file(os.path.join(data_dir, "test.review"))
 
     # split train and validation set
@@ -220,7 +233,7 @@ def run_for_dataset(dataset_name):
     best_model_state = None
 
     for lr in LEARNING_RATES:
-        print(f"\nTraining with learning rate {lr} on dataset {dataset_name}")
+        logging.info(f"\nTraining with learning rate {lr} on dataset {dataset_name}")
 
         model = MyClassificationModel(MODEL_NAME).to(DEVICE)
         optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
@@ -229,12 +242,12 @@ def run_for_dataset(dataset_name):
         early_stopping = EarlyStopping(patience=EARLY_STOPPING_PATIENCE, verbose=True)
 
         for epoch in range(NUM_EPOCHS):
-            print(f"Epoch {epoch+1}/{NUM_EPOCHS}")
+            logging.info(f"Epoch {epoch+1}/{NUM_EPOCHS}")
             train_loss = train_one_epoch(model, train_loader, optimizer, scheduler)
-            print(f"Train loss: {train_loss:.4f}")
+            logging.info(f"Train loss: {train_loss:.4f}")
 
             valid_acc = eval_model(model, valid_loader)
-            print(f"Validation accuracy: {valid_acc:.4f}")
+            logging.info(f"Validation accuracy: {valid_acc:.4f}")
 
             if valid_acc > best_valid_acc:
                 best_valid_acc = valid_acc
@@ -243,17 +256,34 @@ def run_for_dataset(dataset_name):
 
             early_stopping(valid_acc)
             if early_stopping.early_stop:
-                print("Early stopping triggered.")
+                logging.info("Early stopping triggered.")
                 break
 
     # choose the best performing model on validation set to test
-    print(f"\nLoading best model with LR={best_lr} for test evaluation on {dataset_name}...")
+    logging.info(f"\nLoading best model with LR={best_lr} for test evaluation on {dataset_name}...")
     model.load_state_dict(best_model_state)
     test_acc = eval_model(model, test_loader)
-    print(f"Test accuracy on {dataset_name}: {test_acc:.4f}")
+    logging.info(f"Test accuracy on {dataset_name}: {test_acc:.4f}")
 
 
 def main():
+    args = parse_args()
+    global MODEL_NAME
+    MODEL_NAME = args.model_name
+
+    short_model_id = MODEL_NAME.split("/models/")[-1].replace("/", "_")
+    log_filename = f"training_{short_model_id}.log"
+
+    # initialize logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        datefmt="%Y-%m-%d %H:%M:%S",
+        handlers=[
+            logging.FileHandler(log_filename),
+            logging.StreamHandler()
+        ]
+    )
     for ds in DATASETS:
         run_for_dataset(ds)
 
