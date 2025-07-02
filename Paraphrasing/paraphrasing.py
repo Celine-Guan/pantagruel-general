@@ -27,7 +27,7 @@ torch.cuda.manual_seed_all(42)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 MODEL_NAME = None 
 DATA_PARENT_DIR = r"/home/sgu/datasets/PAWS-X/fr"
-BATCH_SIZE = 32
+BATCH_SIZE = 16
 NUM_EPOCHS = 30
 LEARNING_RATES = [1e-5, 5e-5, 1e-6, 5e-6]
 MAX_SEQ_LENGTH = 512
