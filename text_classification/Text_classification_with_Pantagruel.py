@@ -13,6 +13,13 @@ from tqdm import tqdm
 import copy
 import logging
 
+"""**set up seed**"""
+
+random.seed(42)
+np.random.seed(42)
+torch.manual_seed(42)
+torch.cuda.manual_seed_all(42)
+
 """**set up parameters**"""
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
