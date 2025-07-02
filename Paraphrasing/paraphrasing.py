@@ -2,7 +2,6 @@
 
 import os
 import re
-import xml.etree.ElementTree as ET
 import torch
 import random
 import torch.nn as nn
