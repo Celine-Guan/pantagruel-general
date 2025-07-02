@@ -107,7 +107,7 @@ class ReviewDataset(Dataset):
 
 """**Class: pretrained model + classification head**"""
 
-class MyClassificationModel(nn.Module):
+class TextClassificationModel(nn.Module):
     def __init__(self, model_name, num_classes=2, dropout_rate=0.1):
         super().__init__()
         self.backbone = AutoModel.from_pretrained(model_name)
