@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 import torch
 import random
 import torch.nn as nn
+import numpy as np
 from torch.utils.data import Dataset, DataLoader, random_split
 from transformers import AutoTokenizer, AutoModel
 from transformers import get_scheduler
