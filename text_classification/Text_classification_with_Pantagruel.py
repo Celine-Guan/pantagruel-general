@@ -237,7 +237,7 @@ def run_for_dataset(dataset_name):
     for lr in LEARNING_RATES:
         logging.info(f"\nTraining with learning rate {lr} on dataset {dataset_name}")
 
-        model = MyClassificationModel(MODEL_NAME).to(DEVICE)
+        model = TextClassificationModel(MODEL_NAME).to(DEVICE)
         optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
         num_training_steps = NUM_EPOCHS * len(train_loader)
         scheduler = get_scheduler("linear", optimizer=optimizer, num_warmup_steps=0, num_training_steps=num_training_steps)
