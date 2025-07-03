@@ -25,6 +25,7 @@ def set_seed(seed):
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
+SEED = 42
 
 """**set up parameters**"""
 
@@ -224,12 +225,13 @@ def run_for_dataset(dataset_name):
     n_valid = int(len(train_texts) * VALID_RATIO)
     n_train = len(train_texts) - n_valid
 
+    generator = torch.Generator().manual_seed(SEED)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     train_dataset = ReviewDataset(train_texts, train_labels, tokenizer, MAX_SEQ_LENGTH)
-    train_set, valid_set = random_split(train_dataset, [n_train, n_valid])
+    train_set, valid_set = random_split(train_dataset, [n_train, n_valid], generator=generator)
     test_dataset = ReviewDataset(test_texts, test_labels, tokenizer, MAX_SEQ_LENGTH)
 
-    train_loader = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True)
+    train_loader = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True,generator=torch.Generator().manual_seed(SEED))
     valid_loader = DataLoader(valid_set, batch_size=BATCH_SIZE, shuffle=False)
     test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
@@ -272,6 +274,7 @@ def run_for_dataset(dataset_name):
 
 
 def main():
+    set_seed(SEED)
     args = parse_args()
     global MODEL_NAME
     MODEL_NAME = args.model_name
