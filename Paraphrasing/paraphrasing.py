@@ -24,6 +24,7 @@ def set_seed(seed):
     torch.cuda.manual_seed_all(seed)
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
+SEED = 42
 
 """**set up parameters**"""
 
@@ -255,7 +256,7 @@ def run_pawsx():
 
 
 def main():
-    set_seed(42)
+    set_seed(SEED)
     args = parse_args()
     global MODEL_NAME
     MODEL_NAME = args.model_name
