@@ -225,13 +225,12 @@ def run_for_dataset(dataset_name):
     n_valid = int(len(train_texts) * VALID_RATIO)
     n_train = len(train_texts) - n_valid
 
-    generator = torch.Generator().manual_seed(SEED)
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
     train_dataset = ReviewDataset(train_texts, train_labels, tokenizer, MAX_SEQ_LENGTH)
-    train_set, valid_set = random_split(train_dataset, [n_train, n_valid], generator=generator)
+    train_set, valid_set = random_split(train_dataset, [n_train, n_valid])
     test_dataset = ReviewDataset(test_texts, test_labels, tokenizer, MAX_SEQ_LENGTH)
 
-    train_loader = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True,generator=torch.Generator().manual_seed(SEED))
+    train_loader = DataLoader(train_set, batch_size=BATCH_SIZE, shuffle=True)
     valid_loader = DataLoader(valid_set, batch_size=BATCH_SIZE, shuffle=False)
     test_loader = DataLoader(test_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
