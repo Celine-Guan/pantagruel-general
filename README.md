@@ -1,1 +1,3 @@
 # Pantagruel-eval
+The Pantagruel project (ANR 23-IAS1-0001) aims to develop and evaluate inclusive multimodal linguistic models (written, oral, pictograms) for French.
+The Pantagruel-eval project evaluates the performance of a series of Pantagruel French models using a variety of NLP tasks, most of which are from the FLUE benchmark designed to evaluate the performance of FlauBERT, a French language model. In this Pantagruel-eval project, for tasks involved in FLUE, we use the same datasets, follow the same model structure and the same hyperparameter settings. All are in the reference paper: [FLUE benchmark](https://aclanthology.org/2020.lrec-1.302/) and the github [Flaubert github](https://github.com/getalp/Flaubert).
