@@ -279,7 +279,7 @@ def main():
     MODEL_NAME = args.model_name
 
     short_model_id = MODEL_NAME.split("/models/")[-1].replace("/", "_")
-    log_filename = f"training_{short_model_id}.log"
+    log_filename = f"training_textclassification_{short_model_id}.log"
 
     # initialize logging
     logging.basicConfig(
