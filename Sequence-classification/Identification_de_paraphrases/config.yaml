@@ -1,0 +1,23 @@
+# General
+seed: 123
+device: "cuda"  # or "cpu"
+
+# Paths
+data_dir: "/home/sgu/datasets/PAWS-X/fr"
+log_dir: "logs/identification_de_paraphrases"
+save_dir: "checkpoints/identification_de_paraphrases"
+
+# Model
+model_name: "camembert-base"
+max_seq_length: 512
+num_classes: 2
+dropout: 0.1
+
+# Training
+batch_size: 16
+num_epochs: 30
+learning_rates: [1e-5, 5e-5, 1e-6, 5e-6]
+early_stopping_patience: 3
+
+# Dataset
+datasets: ["train", "dev", "test"]
