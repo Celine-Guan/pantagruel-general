@@ -5,11 +5,11 @@ channels:
   - defaults
 dependencies:
   - python=3.12
-  - pytorch  
+  - pip
   - scikit-learn
   - tqdm
   - sacremoses
   - pyyaml
-  - pip
   - pip:
+      - torch 
       - git+https://github.com/formiel/transformers.git@pantagruel
