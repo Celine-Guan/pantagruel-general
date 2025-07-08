@@ -43,6 +43,8 @@ Each task (e.g., sentiment analysis or paraphrasing) has its own config.yaml, sp
 - learning_rates: List of LR values for model tuning
 
 - early_stopping_patience: Patience value for early stopping
+
+- model_name: The name/path of evaluated model, if the model is a standard HuggingFace model which can be pulled directly from transformer, just use the model name, otherwise use the path of model on your server, when changing model, you can simply modify the corresponding config.yaml
 ## 🧩 Supported Models
 This project supports any Hugging Face-compatible transformer model. Custom models like pantagruel are also supported by installing a forked version of transformers.
 ## 📦 Dependencies
