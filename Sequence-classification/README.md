@@ -25,12 +25,13 @@ conda env create -f environment.yml
 conda activate sequence-classification
 ```
 ### 3. Run training
+For sentiment analysis task:
 ```bash
-python3 main.py --model_name <your_model_name_or_path>
+python main.py --task analyse_de_sentiment
 ```
-Example:
+For paraphrasing task
 ```bash
-python3 main.py --model_name pantagruel/pantagruel-large
+python main.py --task identification_de_paraphrases
 ```
 ## ⚙️ Configuration
 Each task (e.g., sentiment analysis or paraphrasing) has its own config.yaml, specifying:
