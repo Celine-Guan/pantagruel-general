@@ -1,6 +1,6 @@
 torch
-transformers
 scikit-learn
 tqdm
 sacremoses
 pyyaml
+git+https://github.com/formiel/transformers.git@pantagruel
