@@ -27,11 +27,11 @@ conda activate sequence-classification
 ### 3. Run training
 For sentiment analysis task:
 ```bash
-python main.py --task analyse_de_sentiment
+python3 main.py --task analyse_de_sentiment
 ```
 For paraphrasing task
 ```bash
-python main.py --task identification_de_paraphrases
+python3 main.py --task identification_de_paraphrases
 ```
 ## ⚙️ Configuration
 Each task (e.g., sentiment analysis or paraphrasing) has its own config.yaml, specifying:
