@@ -3,6 +3,7 @@ import logging
 import random
 import numpy as np
 import torch
+import yaml
 
 def set_seed(seed: int = 42):
     random.seed(seed)
@@ -46,3 +47,8 @@ def init_logger(log_file: str = None, log_level=logging.INFO):
         datefmt="%Y-%m-%d %H:%M:%S",
         handlers=handlers
     )
+
+
+def load_yaml(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f)
