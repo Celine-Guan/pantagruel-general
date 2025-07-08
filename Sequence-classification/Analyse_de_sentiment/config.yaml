@@ -4,8 +4,6 @@ device: "cuda"  # or "cpu"
 
 # Paths
 data_dir: "/home/sgu/datasets/CLS/raw/cls-acl10-unprocessed/fr"
-log_dir: "logs/analyse_de_sentiment"
-save_dir: "checkpoints/analyse_de_sentiment"
 
 # Model
 model_name: "camembert-base"  
