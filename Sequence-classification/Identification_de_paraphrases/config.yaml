@@ -4,8 +4,6 @@ device: "cuda"  # or "cpu"
 
 # Paths
 data_dir: "/home/sgu/datasets/PAWS-X/fr"
-log_dir: "logs/identification_de_paraphrases"
-save_dir: "checkpoints/identification_de_paraphrases"
 
 # Model
 model_name: "camembert-base"
