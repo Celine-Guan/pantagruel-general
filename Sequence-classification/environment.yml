@@ -1,13 +1,15 @@
 name: sequence-classification
 channels:
-  - defaults
+  - pytorch
   - conda-forge
+  - defaults
 dependencies:
   - python=3.12
+  - pytorch  
+  - scikit-learn
+  - tqdm
+  - sacremoses
+  - pyyaml
   - pip
   - pip:
-      - torch
-      - scikit-learn
-      - tqdm
-      - sacremoses
       - git+https://github.com/formiel/transformers.git@pantagruel
