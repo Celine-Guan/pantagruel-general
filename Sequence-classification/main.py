@@ -6,8 +6,8 @@ from Identification_de_paraphrases.train import run_training as run_paraphrase
 from common import load_yaml
 
 TASK_CONFIGS = {
-    "analyse_de_sentiment": "analyse_de_sentiment/config.yaml",
-    "identification_de_paraphrases": "identification_de_paraphrases/config.yaml"
+    "analyse_de_sentiment": "Analyse_de_sentiment/config.yaml",
+    "identification_de_paraphrases": "Identification_de_paraphrases/config.yaml"
 }
 
 def main():
