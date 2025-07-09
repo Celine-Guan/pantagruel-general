@@ -1,8 +1,8 @@
 import os
 import argparse
 import logging
-from analyse_de_sentiment.train import run_training as run_sentiment
-from identification_de_paraphrases.train import run_training as run_paraphrase
+from Analyse_de_sentiment.train import run_training as run_sentiment
+from Identification_de_paraphrases.train import run_training as run_paraphrase
 from common import load_yaml
 
 TASK_CONFIGS = {
