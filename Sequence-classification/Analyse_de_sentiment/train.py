@@ -44,6 +44,7 @@ def run_training(cfg):
         best_model_state = None
 
         for lr in cfg["learning_rates"]:
+            lr = float(lr)
             logging.info(f"\nTraining with learning rate {lr}")
             model = SequenceClassificationModel(cfg["model_name"], num_classes=cfg["num_classes"], dropout_rate=cfg["dropout"]).to(device)
             optimizer = AdamW(model.parameters(), lr=lr)
