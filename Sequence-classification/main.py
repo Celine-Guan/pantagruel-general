@@ -4,6 +4,7 @@ import logging
 from Analyse_de_sentiment.train import run_training as run_sentiment
 from Identification_de_paraphrases.train import run_training as run_paraphrase
 from common import load_yaml
+from common.utils import init_logger
 
 TASK_CONFIGS = {
     "analyse_de_sentiment": "Analyse_de_sentiment/config.yaml",
@@ -23,18 +24,13 @@ def main():
     config = load_yaml(config_path)
 
     # Setup logging
-    os.makedirs(config["log_dir"], exist_ok=True)
-    log_path = os.path.join(config["log_dir"], f"training_{task_name}.log")
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s [%(levelname)s] %(message)s",
-        handlers=[
-            logging.FileHandler(log_path),
-            logging.StreamHandler()
-        ]
-    )
+    model_name = config.get("model_name", "model")
+    short_model_id = model_name.split("/models/")[-1].replace("/", "_")
+    log_file = f"training_{task_name}_{short_model_id}.log"
 
-    logging.info(f"Starting task: {task_name}")
+    init_logger(log_file)
+    logging.info(f"Starting task: {task_name} with model: {short_model_id}")
+    
     if task_name == "analyse_de_sentiment":
         run_sentiment(config)
     elif task_name == "identification_de_paraphrases":
