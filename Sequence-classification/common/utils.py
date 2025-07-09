@@ -38,7 +38,9 @@ class EarlyStopping:
 def init_logger(log_file: str = None, log_level=logging.INFO):
     handlers = [logging.StreamHandler()]
     if log_file:
-        os.makedirs(os.path.dirname(log_file), exist_ok=True)
+        log_dir = os.path.dirname(log_file)
+        if log_dir:  
+            os.makedirs(log_dir, exist_ok=True)
         handlers.append(logging.FileHandler(log_file))
     
     logging.basicConfig(
