@@ -12,7 +12,7 @@ This project provides a modular framework for training and evaluating transforme
 
 ```bash
 git clone git@github.com:GUShuyue/Pantagruel-eval.git
-cd Sequence-classification
+cd ~/Pantagruel-eval/Sequence-classification
 ```
 ### 2. Create and activate the conda environment
 If you're using Conda:
