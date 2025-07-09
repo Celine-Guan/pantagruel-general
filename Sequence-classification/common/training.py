@@ -1,5 +1,6 @@
 from tqdm import tqdm
 from sklearn.metrics import accuracy_score
+import torch
 
 def train_one_epoch(model, dataloader, optimizer, scheduler, criterion, device):
     model.train()
