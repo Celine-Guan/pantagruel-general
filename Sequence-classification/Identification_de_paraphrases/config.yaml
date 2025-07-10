@@ -12,6 +12,8 @@ model_name: "/home/sgu/models/Text_Base_fr_OSCAR_camtok/HuggingFace"
 max_seq_length: 512
 num_classes: 2
 dropout: 0.1
+# if the tokenizer is in its own path, use in config seperate pathes for tokenizer and backbone model
+# eg: tokenizer: "/home/sgu/models/Text_Base_fr_OSCAR_camtok/tokenizer"
 
 # Training
 batch_size: 16
