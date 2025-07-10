@@ -6,10 +6,14 @@ device: "cuda"  # or "cpu"
 data_dir: "/home/sgu/datasets/CLS/raw/cls-acl10-unprocessed/fr"
 
 # Model
+# when changing model, just change the value of model_name, if it's a local model not yet in the HuggingFace, put the model path on local server.
+# eg: "/home/sgu/models/Text_Base_fr_OSCAR_camtok/HuggingFace"
 model_name: "camembert-base"  
 max_seq_length: 512
 num_classes: 2
 dropout: 0.1
+# if the tokenizer is in its own path, use in config seperate pathes for tokenizer and backbone model
+# eg: tokenizer: "/home/sgu/models/Text_Base_fr_OSCAR_camtok/tokenizer"
 
 # Training
 batch_size: 16
