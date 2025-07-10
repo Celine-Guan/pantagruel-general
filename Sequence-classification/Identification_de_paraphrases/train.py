@@ -27,6 +27,8 @@ def run_training(cfg):
     init_logger()
     device = torch.device(cfg["device"] if torch.cuda.is_available() else "cpu")
 
+    # for local models, if the tokenizer is in its own path, 
+    # tokenizer = AutoTokenizer.from_pretrained(cfg["tokenizer_name"])
     tokenizer = AutoTokenizer.from_pretrained(cfg["model_name"])
     datasets = load_pawsx_datasets(cfg["data_dir"], tokenizer, cfg["max_seq_length"])
 
