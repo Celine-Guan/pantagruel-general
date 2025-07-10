@@ -24,6 +24,7 @@ Or manually:
 conda env create -f environment.yml
 conda activate sequence-classification
 ```
+**RB: To run the Pantagruel models we need to install the pantagruel branch of transformer, the installation code is in the environment.yml**
 ### 3. Run training
 For sentiment analysis task:
 ```bash
