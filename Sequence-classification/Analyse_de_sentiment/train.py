@@ -18,7 +18,7 @@ def run_training(cfg):
     set_seed(cfg["seed"])
     init_logger()
     device = torch.device(cfg["device"] if torch.cuda.is_available() else "cpu")
-    tokenizer = AutoTokenizer.from_pretrained(cfg["model_name"])
+    tokenizer = AutoTokenizer.from_pretrained(cfg["tokenizer_name"])
 
     results = {}
 
