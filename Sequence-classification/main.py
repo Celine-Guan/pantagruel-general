@@ -7,15 +7,15 @@ from common import load_yaml
 from common.utils import init_logger
 
 TASK_CONFIGS = {
-    "analyse_de_sentiment": "Analyse_de_sentiment/config.yaml",
-    "identification_de_paraphrases": "Identification_de_paraphrases/config.yaml"
+    "Analyse_de_sentiment": "Analyse_de_sentiment/config.yaml",
+    "Identification_de_paraphrases": "Identification_de_paraphrases/config.yaml"
 }
 
 def main():
     parser = argparse.ArgumentParser(description="Sequence Classification Task Runner")
     parser.add_argument(
         "--task", choices=TASK_CONFIGS.keys(), required=True,
-        help="Which task to run: analyse_de_sentiment or identification_de_paraphrases"
+        help="Which task to run: Analyse_de_sentiment or Identification_de_paraphrases"
     )
     args = parser.parse_args()
     task_name = args.task
@@ -31,9 +31,9 @@ def main():
     init_logger(log_file)
     logging.info(f"Starting task: {task_name} with model: {short_model_id}")
     
-    if task_name == "analyse_de_sentiment":
+    if task_name == "Analyse_de_sentiment":
         run_sentiment(config)
-    elif task_name == "identification_de_paraphrases":
+    elif task_name == "Identification_de_paraphrases":
         run_paraphrase(config)
     logging.info("Training completed.")
 
