@@ -26,6 +26,7 @@ conda activate sequence-classification
 ```
 **RB: To run the Pantagruel models we need to install the pantagruel branch of transformer, the installation code is in the environment.yml**
 ### 3. Run training
+#### ✨ If you want to test each time one model on one task, modify the model and tokenizer name in corresponding config file, then run the following code in the terminal.
 For sentiment analysis task:
 ```bash
 python3 main.py --task analyse_de_sentiment
@@ -33,6 +34,18 @@ python3 main.py --task analyse_de_sentiment
 For paraphrasing task
 ```bash
 python3 main.py --task identification_de_paraphrases
+```
+#### ✨ If you want to run all models on all tasks, you can run the run_all_models bash file in terminal:
+```bash
+bash run_all_models.sh
+```
+⏳ Since testing all models on all tasks really takes time, you could try to run it in the background:
+```bash
+nohup bash run_all_models.sh > all_runs.log 2>&1 &
+```
+Then you can run the following code to monitor the real-time output，press Ctrl+C to stop following:
+```bash
+tail -f all_runs.log
 ```
 ## ⚙️ Configuration
 Each task (e.g., sentiment analysis or paraphrasing) has its own config.yaml, specifying:
