@@ -11,8 +11,8 @@ data_dir: "/home/sgu/datasets/PAWS-X/fr"
 # if it's a local model not yet in the HuggingFace,the model path and tokenizer path on local server may be same or different.
 # so just put corresponding model and tokenizer path
 # eg: "/home/sgu/models/Text_Base_fr_OSCAR_camtok/HuggingFace"
-model_name: "/home/sgu/models/Text_Base_fr_4GB_v0/HuggingFace"
-tokenizer_name: "/home/sgu/models/Text_Base_fr_4GB_v0/HuggingFace"
+model_name: "/home/sgu/models/Text_Base_fr_4GB_v1/HuggingFace"
+tokenizer_name: "/home/sgu/models/Text_Base_fr_4GB_v1/HuggingFace"
 max_seq_length: 512
 num_classes: 2
 dropout: 0.1
