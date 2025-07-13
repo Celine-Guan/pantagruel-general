@@ -29,11 +29,11 @@ conda activate sequence-classification
 #### ✨ If you want to test each time one model on one task, modify the model and tokenizer name in corresponding config file, then run the following code in the terminal.
 For sentiment analysis task:
 ```bash
-python3 main.py --task analyse_de_sentiment
+python3 main.py --task Analyse_de_sentiment
 ```
 For paraphrasing task
 ```bash
-python3 main.py --task identification_de_paraphrases
+python3 main.py --task Identification_de_paraphrases
 ```
 #### ✨ If you want to run all models on all tasks, you can run the run_all_models bash file in terminal:
 ```bash
