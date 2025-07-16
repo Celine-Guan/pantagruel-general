@@ -5,7 +5,7 @@ from Analyse_de_sentiment import run_training as run_sentiment
 from Identification_de_paraphrases import run_training as run_paraphrase
 from Natural_language_inference import run_training as run_nli
 from common import load_yaml
-from common.utils import init_logger
+from common import init_logger
 
 TASK_CONFIGS = {
     "Analyse_de_sentiment": "Analyse_de_sentiment/config.yaml",
