@@ -14,7 +14,7 @@ from common import (
     NLIClassificationModel
 )
 
-from .data_loader import load_pawsx_datasets
+from .data_loader import load_xnli_datasets
 
 
 def load_config(config_path: str):
@@ -29,7 +29,7 @@ def run_training(cfg):
 
     # for some local models, the tokenizer and the backbone model may in different path
     tokenizer = AutoTokenizer.from_pretrained(cfg["tokenizer_name"])
-    datasets = load_pawsx_datasets(cfg["data_dir"], tokenizer, cfg["max_seq_length"])
+    datasets = load_xnli_datasets(cfg["data_dir"], tokenizer, cfg["max_seq_length"])
 
     train_loader = DataLoader(datasets["train"], batch_size=cfg["batch_size"], shuffle=True)
     valid_loader = DataLoader(datasets["dev"], batch_size=cfg["batch_size"], shuffle=False)
