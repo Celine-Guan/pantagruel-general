@@ -75,3 +75,29 @@ def load_xnli_datasets(data_dir, tokenizer, max_len):
 
     return datasets
 
+class InferenceDataset(Dataset):
+    def __init__(self, texts, labels, tokenizer, max_len):
+        self.texts = texts  # List of tuple pairs (sent1, sent2)
+        self.labels = labels
+        self.tokenizer = tokenizer
+        self.max_len = max_len
+
+    def __len__(self):
+        return len(self.texts)
+
+    def __getitem__(self, idx):
+        sent1, sent2 = self.texts[idx]
+        label = self.labels[idx]
+        encoded = self.tokenizer(
+            sent1,
+            sent2,
+            padding="max_length",
+            truncation=True,
+            max_length=self.max_len,
+            return_tensors="pt"
+        )
+        return {
+            "input_ids": encoded["input_ids"].squeeze(0),
+            "attention_mask": encoded["attention_mask"].squeeze(0),
+            "labels": torch.tensor(label, dtype=torch.long)
+        }
