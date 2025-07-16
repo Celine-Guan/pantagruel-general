@@ -35,6 +35,10 @@ For paraphrasing task
 ```bash
 python3 main.py --task Identification_de_paraphrases
 ```
+For natural language inference task
+```bash
+python3 main.py --task Natural_language_inference
+```
 #### ✨ If you want to run all models on all tasks, you can run the run_all_models bash file in terminal:
 ```bash
 bash run_all_models.sh
@@ -68,6 +72,8 @@ See requirements.txt and environment.yml for full dependency details.
 
 - Paraphrasing: [PAWS-X (French subset)](https://github.com/google-research-datasets/paws/tree/master/pawsx).
 
+- Natural language inference: [XNLI (French subset)](https://github.com/facebookresearch/XNLI)
+
 Make sure the datasets are downloaded and placed in the appropriate paths, as defined in config.yaml. Your can use your own path and write it in the corresponding config.yaml file.
 ## 📝 Reference
-Sentiment analysis and Paraphrasing tasks in this project are part of the FLUE benchmark, to know more about FLUE, you can read the [reference paper](https://aclanthology.org/2020.lrec-1.302/).
+Sentiment analysis, Paraphrasing and Natural language inference tasks in this project are part of the FLUE benchmark, to know more about FLUE, you can read the [reference paper](https://aclanthology.org/2020.lrec-1.302/).
