@@ -17,4 +17,11 @@ Example:
 - Input A: "A man is playing a guitar."
 - Input B: "Someone is playing an instrument."
 - Output: Paraphrase (1)
+## 1.3 Natural language inference 
+Dataset: [XNLI](https://github.com/google-research-datasets/paws](https://github.com/facebookresearch/XNLI)
 
+Task description: It's a three-class classification task that determines the logical relationship between a premise sentence and a hypothesis sentence. The output label indicates whether the hypothesis is entailed by, contradicts, or is neutral with respect to the premise.
+Example:
+- Input A (Premise): "A woman is walking her dog in the park."
+- Input B (Hypothesis): "A woman is outside with her pet."
+- Output: Entailment (0)
