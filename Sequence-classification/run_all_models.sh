@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # task list
-tasks=("Analyse_de_sentiment" "Identification_de_paraphrases")
+tasks=("Analyse_de_sentiment" "Identification_de_paraphrases" "Natural_language_inference")
 
 # name/path for all models
 models=(
