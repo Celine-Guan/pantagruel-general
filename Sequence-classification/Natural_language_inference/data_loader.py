@@ -50,3 +50,28 @@ def parse_multinli_train(filepath):
             labels.append(label_map[label])
     return texts, labels
 
+def load_xnli_datasets(data_dir, tokenizer, max_len):
+    """
+    Load XNLI French datasets from TSV files:
+    - multinli.train.fr.tsv (train)
+    - xnli.dev.tsv (dev)
+    - xnli.test.tsv (test)
+
+    Returns a dict with keys "train", "dev", "test" and InferenceDataset objects.
+    """
+    datasets = {}
+
+    train_path = os.path.join(data_dir, "multinli.train.fr.tsv")
+    dev_path = os.path.join(data_dir, "xnli.dev.tsv")
+    test_path = os.path.join(data_dir, "xnli.test.tsv")
+
+    train_texts, train_labels = parse_multinli_train(train_path)
+    dev_texts, dev_labels = parse_xnli_tsv(dev_path, target_lang="fr")
+    test_texts, test_labels = parse_xnli_tsv(test_path, target_lang="fr")
+
+    datasets["train"] = InferenceDataset(train_texts, train_labels, tokenizer, max_len)
+    datasets["dev"] = InferenceDataset(dev_texts, dev_labels, tokenizer, max_len)
+    datasets["test"] = InferenceDataset(test_texts, test_labels, tokenizer, max_len)
+
+    return datasets
+
