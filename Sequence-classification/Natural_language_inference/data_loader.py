@@ -43,10 +43,10 @@ def parse_multinli_train(filepath):
             cols = line.strip().split("\t")
             if len(cols) != 3:
                 continue
-            sent1, sent2, label = cols
+            premise, hypo, label = cols
             if label not in label_map:
                 continue
-            texts.append((sent1, sent2))
+            texts.append((premise, hypo))
             labels.append(label_map[label])
     return texts, labels
 
