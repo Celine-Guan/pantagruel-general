@@ -9,6 +9,7 @@ dependencies:
   - scikit-learn
   - tqdm
   - sacremoses
+  - timm
   - pyyaml
   - pip:
       - torch 
