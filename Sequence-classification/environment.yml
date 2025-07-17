@@ -11,6 +11,8 @@ dependencies:
   - sacremoses
   - timm
   - pyyaml
+  - sentencepiece
+  - protobuf
   - pip:
       - torch 
       - git+https://github.com/formiel/transformers.git@pantagruel
