@@ -3,4 +3,5 @@ scikit-learn
 tqdm
 sacremoses
 pyyaml
+timm
 git+https://github.com/formiel/transformers.git@pantagruel
