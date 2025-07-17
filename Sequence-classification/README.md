@@ -4,6 +4,7 @@ This project provides a modular framework for training and evaluating transforme
 
 - **Sentiment Analysis (CLS)**
 - **Paraphrase Identification (PAWS-X)**
+- **Natural Language Inference (XNLI)**
 
 ## 🗂️ Project Structure
 
