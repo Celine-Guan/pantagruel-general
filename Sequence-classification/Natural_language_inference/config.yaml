@@ -11,8 +11,8 @@ data_dir: "/home/sgu/datasets/XNLI/fr"
 # if it's a local model not yet in the HuggingFace,the model path and tokenizer path on local server may be same or different.
 # so just put corresponding model and tokenizer path
 # eg: "/home/sgu/models/Text_Base_fr_OSCAR_camtok/HuggingFace"
-model_name: "/home/sgu/models/Text_Base_fr_4GB_camtok_step1M/HuggingFace"
-tokenizer_name: "/home/sgu/models/Text_Base_fr_4GB_camtok_step1M/HuggingFace"
+model_name: "/home/sgu/models/Text_Base_fr_4GB_camtok_step2M/HuggingFace"
+tokenizer_name: "/home/sgu/models/Text_Base_fr_4GB_camtok_step2M/HuggingFace"
 max_seq_length: 512
 num_classes: 3 # entailment / contradiction / neutral
 dropout: 0.1
