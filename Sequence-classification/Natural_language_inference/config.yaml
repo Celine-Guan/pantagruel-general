@@ -1,5 +1,5 @@
 # General
-seed: 42
+seed: 2025
 device: "cuda"  # or "cpu"
 
 # Paths
