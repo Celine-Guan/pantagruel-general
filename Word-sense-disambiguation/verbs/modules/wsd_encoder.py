@@ -95,8 +95,8 @@ class TransformerWSDEncoder(WSDEncoder):
 
         tok_ids, att_mask, span = inputs
 
-        output  = self.model(tok_ids, attention_mask=att_mask)[0] # mask is used for pad tokens
-        # output = self.model(tok_ids)[0]
+        # output  = self.model(tok_ids, attention_mask=att_mask)[0] # mask is used for pad tokens
+        output = self.model(tok_ids, attention_mask=att_mask, mode='TEXT')[0]
 
         # compute number of bpe per token
         first_bpe = span[:,:,0] # first bpe indice
