@@ -153,4 +153,8 @@ def load_model(model_path):
     model = AutoModel.from_pretrained(model_path)
     tokenizer = AutoTokenizer.from_pretrained(model_path)
 
+    if hasattr(model, "modality_encoders") and "TEXT" in model.modality_encoders:
+        print("Multi-modal model detected. Using only the TEXT modality encoder.")
+        model = model.modality_encoders["TEXT"]
+
     return model, tokenizer
