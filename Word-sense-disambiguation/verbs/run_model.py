@@ -5,7 +5,6 @@ import argparse
 from modules.wsd_encoder import TransformerWSDEncoder
 from modules.dataset import WSDDatasetReader
 from modules import utils
-from WSD_evaluation.modules.dataset import WSDDatasetReader
 
 from pudb import set_trace
 
