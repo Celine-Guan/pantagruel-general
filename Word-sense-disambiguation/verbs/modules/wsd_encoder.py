@@ -95,10 +95,10 @@ class TransformerWSDEncoder(WSDEncoder):
 
         tok_ids, att_mask, span = inputs
 
-        output  = self.model(tok_ids, attention_mask=att_mask)[0] # mask is used for pad tokens
-        # the following line is for evaluating Pantagruel models since they are multi-modal
         # if the tested model is a standard Bert model in HuggingFace, don't add the parameter "mode"
-        # output = self.model(tok_ids, attention_mask=att_mask, mode='TEXT')[0]
+        # output  = self.model(tok_ids, attention_mask=att_mask)[0] # mask is used for pad tokens
+        # the following line is for evaluating Pantagruel models, since they are multi-modal, we add mode = 'TEXT'
+        output = self.model(tok_ids, attention_mask=att_mask, mode='TEXT')[0]
 
         # compute number of bpe per token
         first_bpe = span[:,:,0] # first bpe indice
