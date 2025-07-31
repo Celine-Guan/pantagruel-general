@@ -55,7 +55,7 @@ tail -f all_runs.log
 ## ⚙️ Configuration
 Each task (e.g., sentiment analysis or paraphrasing) has its own config.yaml, specifying:
 
-- data_dir: Dataset location
+- data_dir: Dataset location, use the path of dataset on your own server
 
 - batch_size, max_seq_length, num_epochs
 
