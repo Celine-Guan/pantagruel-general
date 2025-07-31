@@ -1,0 +1,12 @@
+torch
+scikit-learn
+tqdm
+sacremoses
+pyyaml
+timm
+sentencepiece
+protobuf
+lxml
+pudb
+torchtext
+git+https://github.com/formiel/transformers.git@pantagruel
