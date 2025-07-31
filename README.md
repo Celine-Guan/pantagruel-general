@@ -25,3 +25,6 @@ Example:
 - Input A (Premise): "A woman is walking her dog in the park."
 - Input B (Hypothesis): "A woman is outside with her pet."
 - Output: Entailment (0)
+## 2. Word Sense Disambiguation
+## 2.1 Verb sense disambiguation
+The code and documents in Word-sense-disambiguation/verbs are directly copied from directory wsd in flue github
