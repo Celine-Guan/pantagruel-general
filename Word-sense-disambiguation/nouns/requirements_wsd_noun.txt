@@ -1,6 +1,7 @@
 torch==1.7.1
 torchtext==0.8.1
-
+torchaudio==0.7.2
+numpy==1.24.4
 scikit-learn==0.24.2
 tqdm==4.62.3
 sacremoses==0.0.45
@@ -8,5 +9,7 @@ pyyaml==5.4.1
 timm==0.4.12
 sentencepiece==0.1.96
 protobuf==3.20.3
+lxml==6.0.0
 
-git+https://github.com/formiel/transformers.git@pantagruel
+transformers==4.6.1
+# git+https://github.com/formiel/transformers.git@pantagruel
