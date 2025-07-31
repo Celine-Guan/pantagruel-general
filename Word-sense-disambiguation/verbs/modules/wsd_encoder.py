@@ -5,6 +5,7 @@ from tqdm import tqdm
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import inspect
 
 
 class WSDEncoder(nn.Module):
@@ -98,7 +99,12 @@ class TransformerWSDEncoder(WSDEncoder):
         # if the tested model is a standard Bert model in HuggingFace, don't add the parameter "mode"
         # output  = self.model(tok_ids, attention_mask=att_mask)[0] # mask is used for pad tokens
         # the following line is for evaluating Pantagruel models, since they are multi-modal, we add mode = 'TEXT'
-        output = self.model(tok_ids, attention_mask=att_mask, mode='TEXT')[0]
+        # output = self.model(tok_ids, attention_mask=att_mask, mode='TEXT')[0]
+        # to generalize, use the following code to decide whether the model need a choice for mode
+        if 'mode' in inspect.signature(self.model.forward).parameters:
+            output = self.model(tok_ids, attention_mask=att_mask, mode='TEXT')[0]
+        else:
+            output = self.model(tok_ids, attention_mask=att_mask)[0]
 
         # compute number of bpe per token
         first_bpe = span[:,:,0] # first bpe indice
