@@ -26,5 +26,8 @@ Example:
 - Input B (Hypothesis): "A woman is outside with her pet."
 - Output: Entailment (0)
 ## 2. Word Sense Disambiguation
+The code and documents in Word-sense-disambiguation are directly copied from [directory wsd in flue github](https://github.com/getalp/Flaubert/tree/master/flue/wsd)
 ## 2.1 Verb sense disambiguation
-The code and documents in Word-sense-disambiguation/verbs are directly copied from directory wsd in flue github
+There is a little modification in "forward" function in wsd_encoder.py to make the code compatible for Pantagruel models which are multi-modal
+## 2.2 Noun sense disambiguation
+There is still a problem "Version hell", since the original code was written 5 years ago, the version of packages used in requirements_wsd_noun.txt is not compatible to the version of Pantagruel branch of transformer, so the code need to be modified to evaluate Pantagruel models.
