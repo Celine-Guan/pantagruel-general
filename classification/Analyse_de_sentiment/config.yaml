@@ -1,0 +1,38 @@
+# General
+# For single seed, use: seed: 42
+# For multiple seeds (to compute mean and std), use: seeds: [42, 123, 456]
+seeds: [1, 42, 1234, 999]
+device: "cuda"  # or "cpu"
+
+
+
+# HuggingFace settings (optional)
+# You can set the token directly here, or use environment variable HF_TOKEN
+# hf_token: "your_huggingface_token_here"
+
+# Paths
+data_dir: "/home/qguan/datasets/CLS/raw/cls-acl10-unprocessed/fr"
+
+# Model
+# when changing model, just change the value of model_name and tokenizer_name, 
+# for models already in HuggingFace like camembert-base, model_name and tokenizer_name is the same,
+# if it's a local model not yet in the HuggingFace,the model path and tokenizer path on local server may be same or different.
+# so just put corresponding model and tokenizer path
+# eg: "/home/sgu/models/Text_Base_fr_OSCAR_camtok/HuggingFace"
+model_name: "PantagrueLLM/Text_Base_fr_croissant_data2vec_and_mlm_avg"
+tokenizer_name: "PantagrueLLM/Text_Base_fr_croissant_data2vec_and_mlm_avg"
+max_seq_length: 512
+num_classes: 2
+dropout: 0.1
+add_pooling_layer: False
+use_pooler: False
+
+# Training
+batch_size: 16
+num_epochs: 30
+learning_rates: [5e-6]
+valid_ratio: 0.2
+early_stopping_patience: 5
+
+# Dataset
+datasets: ["books", "dvd", "music"]
