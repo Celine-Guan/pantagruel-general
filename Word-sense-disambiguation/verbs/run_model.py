@@ -1,14 +1,22 @@
 # coding: utf8
 
 import argparse
+import os
 
 from modules.wsd_encoder import TransformerWSDEncoder
 from modules.dataset import WSDDatasetReader
 from modules import utils
+import torch
 
 from pudb import set_trace
+from dotenv import load_dotenv
+
+load_dotenv()
 
 from tqdm import tqdm
+
+
+
 
 usage = '''
             ===================================================================================================================
@@ -99,19 +107,21 @@ def main():
     parser.add_argument('--padding', type=int, default=0, help="input padding", metavar=('int'))
     parser.add_argument('--batchsize', type=int, default=1, help="size of batch", metavar=('int'))
     parser.add_argument('--device', default=-1, type=int, help="to run model on GPU, -1 for CPU", metavar=('int'))
+    parser.add_argument('--hf_token', default=None, help="HuggingFace token (or set HF_TOKEN env)")
 
     args = parser.parse_args()
 
     # Loads model and tokenizer
-    model, tokenizer = utils.load_model(args.model)
+    hf_token = args.hf_token or os.environ.get('HF_TOKEN')
+    model, tokenizer = utils.load_model(args.model, hf_token=hf_token)
 
     # puts model on specified device
     if args.device == -1:
-        model.cpu()
-        device = "cpu"
+        device = torch.device("cpu")
+        model.to(device)
     else:
-        device = int(args.device)
-        model.cuda(int(args.device))
+        device = torch.device(f"cuda:{int(args.device)}")
+        model.to(device)
 
     # puts model on eval mode
     model.eval()

@@ -71,3 +71,7 @@ coverage.xml
 
 # logs
 logs/
+
+# outputs
+vsd-output/
+vsd-output_score/

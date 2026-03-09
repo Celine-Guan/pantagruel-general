@@ -10,4 +10,3 @@ lxml
 pudb
 pandas
 torchtext
-git+https://github.com/formiel/transformers.git@pantagruel

@@ -1,9 +1,0 @@
-torch
-scikit-learn
-tqdm
-sacremoses
-pyyaml
-timm
-sentencepiece
-protobuf
-git+https://github.com/formiel/transformers.git@pantagruel

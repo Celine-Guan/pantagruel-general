@@ -31,7 +31,6 @@ def get_data_paths(dirpath):
     for f in os.listdir(dirpath):
         if f.startswith("FSE"):
             data = "test"
-
         else:
             data = "train"
 
@@ -43,7 +42,7 @@ def get_data_paths(dirpath):
             continue
 
         paths["_".join((data, data_type, "path"))] = os.path.join(dirpath, f)
-
+    
     return paths
 
 
@@ -56,9 +55,9 @@ def main(args):
     if not os.path.exists(args.output_dir):
         os.mkdir(args.output_dir)
 
-    test_dirpath = args.output_dir + "test/"
+    test_dirpath = args.output_dir + "/test/"
     os.mkdir(test_dirpath)
-    train_dirpath = args.output_dir + "train/"
+    train_dirpath = args.output_dir + "/train/"
     os.mkdir(train_dirpath)
 
     # copy FSE file to new test directory
@@ -66,20 +65,21 @@ def main(args):
         data = p.split('_')[0]
         data_prefix = paths[p].split('/')[0]
         filename = paths[p].split('/')[-1]
-        copyfile(paths[p], args.output_dir + data + '/'  + filename)
+        copyfile(paths[p], args.output_dir + '/' + data + '/'  + filename)
 
     # if another train data dir is specified
     if args.train:
         for f in os.listdir(args.train):
             file_path = os.path.join(args.train, f)
-            copyfile(file_path, args.output_dir + "train/" + filename)
+            copyfile(file_path, args.output_dir + "/train/" + filename)
 
     # get target keys from FSE and dump to main dir
     fse_dataset = WSDDatasetReader().read_from_data_dirs([test_dirpath])
     target_keys = list(fse_dataset.get_target_keys())
-    with open(args.output_dir + 'targets', 'w') as f:
+    with open(args.output_dir + '/targets', 'w') as f:
         for key in target_keys:
             f.write(key + '\n')
+
 
 
 if __name__ == '__main__':

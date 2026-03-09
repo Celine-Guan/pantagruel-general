@@ -33,9 +33,15 @@ class WSDKnnClassifier:
         return set([mfs])
 
     def compute_prediction(self, target_vec, candidates):
+        # Filter out candidates that do not have vectors
+        candidates_with_vec = [c for c in candidates if hasattr(c, "context_vec") and c.context_vec is not None]
+
+        # If there is no target vector or no valid candidates, return empty prediction
+        if target_vec is None or len(candidates_with_vec) == 0:
+            return None, [], []
 
         if self.average:
-            candidates = [(c.first_label, c.context_vec) for c in candidates]
+            candidates = [(c.first_label, c.context_vec) for c in candidates_with_vec]
             s2vec = defaultdict(list)
             for label, vec in candidates:
                 s2vec[label].append(vec)
@@ -50,7 +56,7 @@ class WSDKnnClassifier:
             pred = set([candidates[best_score_idx][0]])
 
         else:
-            scores = np.array([(c, 1-spatial.distance.cosine(target_vec, c.context_vec)) for  c in candidates])
+            scores = np.array([(c, 1-spatial.distance.cosine(target_vec, c.context_vec)) for  c in candidates_with_vec])
             sorted_scores = sorted(scores, key=lambda t:t[1],reverse=True)
             if self.k > 1:
                 k_closests = [x[0].first_labels for x in sorted_scores[:self.k]]
@@ -91,11 +97,16 @@ class WSDKnnClassifier:
                     candidates=None
                     scores = None
             else:
-                target_vec = instance.context_vec
-                #candidates = self.train[key]
-                candidates = self.train[key]
-                pred, candidates, scores = self.compute_prediction(target_vec, candidates)
-                candidates = [c[0] for c in candidates]
+                # Some test instances may not have vectors; skip prediction for those
+                if not hasattr(instance, "context_vec") or instance.context_vec is None:
+                    pred = None
+                    candidates = None
+                    scores = None
+                else:
+                    target_vec = instance.context_vec
+                    candidates = self.train[key]
+                    pred, candidates, scores = self.compute_prediction(target_vec, candidates)
+                    candidates = [c[0] for c in candidates] if candidates else None
 
             id2pred[id] = pred
             id2log[id] = (instance.key, pos, instance.source, instance.labels, instance.first_label, pred, candidates, scores)

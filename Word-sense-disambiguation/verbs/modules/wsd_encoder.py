@@ -1,4 +1,4 @@
-# coding: utf8
+# # coding: utf8
 
 from abc import abstractmethod
 from tqdm import tqdm
@@ -91,6 +91,43 @@ class TransformerWSDEncoder(WSDEncoder):
 
         return (tok_ids, att_mask, span)
 
+#     # def forward(self, inputs):
+#     #     """Run transformer model on inputs. Average bpes per token and remove cls and sep vectors"""
+
+#     #     tok_ids, att_mask, span = inputs
+
+#     #     # if the tested model is a standard Bert model in HuggingFace, don't add the parameter "mode"
+#     #     # output  = self.model(tok_ids, attention_mask=att_mask)[0] # mask is used for pad tokens
+#     #     # the following line is for evaluating Pantagruel models, since they are multi-modal, we add mode = 'TEXT'
+#     #     # output = self.model(tok_ids, attention_mask=att_mask, mode='TEXT')[0]
+#     #     # to generalize, use the following code to decide whether the model need a choice for mode
+#     #     if 'mode' in inspect.signature(self.model.forward).parameters:
+#     #         output = self.model(tok_ids, attention_mask=att_mask, mode='TEXT')[0]
+#     #     else:
+#     #         output = self.model(tok_ids, attention_mask=att_mask)[0]
+
+#     #     # compute number of bpe per token
+#     #     first_bpe = span[:,:,0] # first bpe indice
+#     #     last_bpe = span[:,:,1] # last bpe indice
+#     #     n_bpe = last_bpe-first_bpe # number of bpe by token = first - last bpe from span
+
+#     #     # mask pad tokens
+#     #     mask = n_bpe.ne(0)
+#     #     n_bpe = n_bpe[mask] # get only actual token bpe
+
+#     #     # compute mean : sum up corresponding bpe then divide by number of bpe
+#     #     indices = torch.arange(n_bpe.size(0), device=output.device).repeat_interleave(n_bpe) # indices for index_add
+#     #     average_vectors = torch.zeros(n_bpe.size(0), output.size(2), device=output.device) # starts from zeros vector
+#     #     average_vectors.index_add_(0, indices, output[att_mask]) # sum of bpe based in indices
+#     #     average_vectors.div_(n_bpe.view(n_bpe.size(0),1)) # divide by number of bpe
+
+#     #     output_ = torch.zeros_like(output) # new output vector to match outputsize
+#     #     output_[mask] = average_vectors
+
+#     #     output = output_[:,1:-1,:] # get rid of cls and sep
+
+#     #     return output
+
     def forward(self, inputs):
         """Run transformer model on inputs. Average bpes per token and remove cls and sep vectors"""
 
@@ -127,3 +164,5 @@ class TransformerWSDEncoder(WSDEncoder):
         output = output_[:,1:-1,:] # get rid of cls and sep
 
         return output
+
+

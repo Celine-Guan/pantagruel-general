@@ -148,9 +148,23 @@ def compute_logs(logs, exp_name):
     return df
 
 
-def load_model(model_path):
+def load_model(model_path, hf_token=None):
+    """Load HF model/tokenizer with remote code allowed and slow tokenizer.
 
-    model = AutoModel.from_pretrained(model_path)
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
+    - trust_remote_code=True avoids interactive prompts for repos with custom code
+    - use_fast=False prevents JSON parsing issues on some repos
+    - optional hf_token for private/gated models
+    """
+    model = AutoModel.from_pretrained(
+        model_path,
+        trust_remote_code=True,
+        token=hf_token
+    )
+    tokenizer = AutoTokenizer.from_pretrained(
+        model_path,
+        trust_remote_code=True,
+        use_fast=False,
+        token=hf_token
+    )
 
     return model, tokenizer
