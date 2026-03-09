@@ -20,29 +20,6 @@ from common import (
 from .data_loader import load_xnli_datasets
 
 
-def get_hf_token(cfg):
-    """
-    Get HuggingFace token from config or environment variable.
-    Priority: config > environment variable > None
-    """
-    # First check config
-    hf_token = cfg.get("hf_token", None)
-    
-    # If not in config or is None, check environment variable
-    if hf_token is None:
-        # Support multiple common env var names
-        hf_token = (
-            os.environ.get("HF_TOKEN")
-            or os.environ.get("HUGGINGFACE_TOKEN")
-            or os.environ.get("HF_HUB_TOKEN")
-        )
-    
-    if hf_token:
-        logging.info("Using HuggingFace authentication token")
-    else:
-        logging.info("No HuggingFace token provided (using public access only)")
-    
-    return hf_token
 
 
 def load_config(config_path: str):
@@ -55,7 +32,7 @@ def run_training_single_seed(cfg, seed, mlflow_experiment_name="NLI"):
     device = torch.device(cfg["device"] if torch.cuda.is_available() else "cpu")
 
     # Get HuggingFace token
-    hf_token = get_hf_token(cfg)
+    hf_token = os.environ.get("HF_TOKEN")
     
     # for some local models, the tokenizer and the backbone model may in different path
     tokenizer = AutoTokenizer.from_pretrained(

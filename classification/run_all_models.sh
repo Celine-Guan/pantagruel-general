@@ -7,22 +7,28 @@ tasks=("Identification_de_paraphrases")
 models=(
     # "camembert-base"
     # "flaubert/flaubert_base_cased"
-    "PantagrueLLM/camembert-base-wikipedia-4gb-weight-fix"
+    # "PantagrueLLM/camembert-base-wikipedia-4gb-weight-fix"
     #"PantagrueLLM/Text_Base_fr_4GB_camtok_step500K"
-    # "PantagrueLLM/Text_Base_fr_OSCAR_camtok"
+    #"PantagrueLLM/Text_Base_fr_OSCAR_camtok"
     # "PantagrueLLM/Text_Base_fr_4GB_step500K_tok_customized"
     # "PantagrueLLM/Text_Base_fr_croissant_data2vec_and_mlm_avg"
+    # "PantagrueLLM/Text_Base_FR_wiki19"
+    "PantagrueLLM/text-base-oscar-mlm"
+    # "PantagrueLLM/Text_Base_FR_croissant"
 )
   
 # name/path for all tokenizers(maybe different to the model name/path)
 tokenizers=(
     # "camembert-base"
     # "flaubert/flaubert_base_cased"
-    "PantagrueLLM/camembert-base-wikipedia-4gb-weight-fix"
-    # "PantagrueLLM/Text_Base_fr_4GB_camtok_step500K"
-    # "PantagrueLLM/Text_Base_fr_OSCAR_camtok"
+    # "PantagrueLLM/camembert-base-wikipedia-4gb-weight-fix"
+    #"PantagrueLLM/Text_Base_fr_4GB_camtok_step500K"
+    #"PantagrueLLM/Text_Base_fr_OSCAR_camtok"
     # "PantagrueLLM/Text_Base_fr_4GB_step500K_tok_customized"
     # "PantagrueLLM/Text_Base_fr_croissant_data2vec_and_mlm_avg"
+    # "PantagrueLLM/Text_Base_FR_wiki19"
+    "PantagrueLLM/text-base-oscar-mlm"
+    # "PantagrueLLM/Text_Base_FR_croissant"
 )
 
 # run each model on each task
@@ -39,7 +45,7 @@ for task in "${tasks[@]}"; do
     sed -i "s|^tokenizer_name:.*|tokenizer_name: \"$tokenizer_name\"|" "$CONFIG_FILE"
 
     # set 5 seeds
-    SEEDS_LINE='seeds: [1, 1234]'
+    SEEDS_LINE='seeds: [1, 999, 1234, 2025]'
     if grep -q '^seeds:' "$CONFIG_FILE"; then
       sed -i "s|^seeds:.*|$SEEDS_LINE|" "$CONFIG_FILE"
     elif grep -q '^seed:' "$CONFIG_FILE"; then
@@ -63,7 +69,7 @@ for task in "${tasks[@]}"; do
         LR_LIST='learning_rates: [5e-6]'
         ;;
       "PantagrueLLM/Text_Base_fr_OSCAR_camtok")
-        LR_LIST='learning_rates: [1e-7]'
+        LR_LIST='learning_rates: [5e-6]'
         ;;
       "PantagrueLLM/Text_Base_fr_4GB_step500K_tok_customized")
         LR_LIST='learning_rates: [1e-5]'
@@ -71,9 +77,18 @@ for task in "${tasks[@]}"; do
       "PantagrueLLM/Text_Base_fr_croissant_data2vec_and_mlm_avg")
         LR_LIST='learning_rates: [5e-6]'
         ;;
+      "PantagrueLLM/Text_Base_FR_wiki19")
+        LR_LIST='learning_rates: [1e-5]'
+        ;;
+      "PantagrueLLM/text-base-oscar-mlm")
+        LR_LIST='learning_rates: [1e-05]'
+        ;;
+      "PantagrueLLM/Text_Base_FR_croissant")
+        LR_LIST='learning_rates: [5e-5,1e-5,5e-6,1e-6]'
+        ;;
 
       *)
-        LR_LIST='learning_rates: [5e-5, 1e-5, 5e-6, 1e-6]'
+        LR_LIST='learning_rates: [1e-5]'
         ;;
     esac
 

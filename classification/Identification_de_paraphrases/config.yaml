@@ -1,5 +1,5 @@
 # General
-seeds: [1, 1234]
+seeds: [1, 999, 1234, 2025]
 device: "cuda"  # or "cpu"
 
 # Paths
@@ -16,8 +16,8 @@ data_dir: "/home/qguan/datasets/PSWS-X"
 # if it's a local model not yet in the HuggingFace,the model path and tokenizer path on local server may be same or different.
 # so just put corresponding model and tokenizer path
 # eg: "/home/sgu/models/Text_Base_fr_OSCAR_camtok/HuggingFace"
-model_name: "PantagrueLLM/camembert-base-wikipedia-4gb-weight-fix"
-tokenizer_name: "PantagrueLLM/camembert-base-wikipedia-4gb-weight-fix"
+model_name: "PantagrueLLM/text-base-oscar-mlm"
+tokenizer_name: "PantagrueLLM/text-base-oscar-mlm"
 max_seq_length: 512
 num_classes: 2
 dropout: 0.1
@@ -27,7 +27,7 @@ use_pooler: False
 # Training
 batch_size: 16
 num_epochs: 30
-learning_rates: [1e-5]
+learning_rates: [1e-05]
 early_stopping_patience: 5
 
 # Dataset
