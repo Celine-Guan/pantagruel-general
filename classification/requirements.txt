@@ -1,10 +1,12 @@
 torch
+numpy
 scikit-learn
+datasets
+transformers
+mlflow
 tqdm
 sacremoses
 pyyaml
-timm
 sentencepiece
 protobuf
-git+https://github.com/formiel/transformers.git@pantagruel
 python-dotenv
