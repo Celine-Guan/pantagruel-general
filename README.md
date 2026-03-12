@@ -1,4 +1,4 @@
-# Pantagruel-eval
+# Pantagruel-FLUE
 
 The Pantagruel project (ANR 23-IAS1-0001) aims to develop and evaluate inclusive multimodal linguistic models (written, oral, pictograms) for French.
 
